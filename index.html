@@ -1,0 +1,589 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Math, Radars &amp; D3.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="./css/radartalk.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1>Math, Radars &amp; D3.js</h1>
+				</section>
+				<section>
+					<img src="./imgs/feynman.jpg"/>
+				</section>
+				<section>
+					<img src="./imgs/patrick.gif"/>
+				</section>
+				<section>
+					<img src="./imgs/secret.jpg"/>
+				</section>
+				<section>
+					<img src="./imgs/temp.gif"/>
+				</section>
+				<section>
+					<img src="./imgs/thandie.jpg"/>
+				</section>
+				<section>
+					<img src="./imgs/westworld.png"/>
+				</section>
+				<section><img src="./imgs/google.png"/></section>
+				<section>
+					<img src="./imgs/radar.png"/>
+				</section>
+				<section>
+					<pre><code class="javascript" data-trim data-noescape>
+g.selectAll(".nodes")
+  .data(y, function(j, i){
+    dataValues.push([
+      cfg.w/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)
+      	*cfg.factor*Math.sin(i*cfg.radians/total)),
+      cfg.h/2*(1-(parseFloat(Math.max(j.value, 0))/cfg.maxValue)
+      	*cfg.factor*Math.cos(i*cfg.radians/total))
+    ]);
+  });</code></pre>
+				</section>
+				<section><img src="./imgs/yoda.gif"/></section>
+				<section data-transition="none"><img src="./imgs/r_1.png"/></section>
+				<section data-transition="none"><img src="./imgs/r_2.png"/></section>
+				<section data-transition="none"><img src="./imgs/r_3.png"/></section>
+				<section data-transition="none"><img src="./imgs/r_4.png"/></section>
+				<section data-transition="none"><img src="./imgs/r_5.png"/></section>
+				<section data-transition="none"><img src="./imgs/r_6.png"/></section>
+				<section data-transition="none">
+				<h3>Let's start with:</h3>
+				<img src="./imgs/axiss.png"/>
+				</section>
+				<section>
+					<img src="./imgs/coords_0.png" class="floating"/>
+				</section>
+				<section>
+					<div class="slide">
+						<pre><code data-trim>
+<svg height="350" width="350">
+  <line x0="0" y0="0" x1="150"  y1="0"></line>
+  <line x0="0" y0="0" x1="0"    y1="150"></line>
+  <line x0="0" y0="0" x1="-150" y1="0"></line>
+  <line x0="0" y0="0" x1="0"    y1="-150"></line>
+</svg>
+
+</code></pre>
+					</div>
+					<div class="viewer">
+<svg height="350" width="350">
+  <line x0="0" y0="0" x1="150"  y1="0"></line>
+  <line x0="0" y0="0" x1="0"    y1="150"></line>
+  <line x0="0" y0="0" x1="-150" y1="0"></line>
+  <line x0="0" y0="0" x1="0"    y1="-150"></line>
+</svg>
+					</div>
+				</section>
+				<section>
+					<div class="slide">
+<pre><code data-trim>
+<svg height="350" width="350">
+  <g transform="translate(175,175)">
+    <line x0="0" y0="0" x1="150"  y1="0"></line>
+    <line x0="0" y0="0" x1="0"    y1="150"></line>
+    <line x0="0" y0="0" x1="-150" y1="0"></line>
+    <line x0="0" y0="0" x1="0"    y1="-150"></line>
+  </g>
+</svg>
+</code></pre>
+					</div>
+					<div class="viewer">
+<svg height="350" width="350">
+ <g transform="translate(175,175)">
+  <line x0="0" y0="0" x1="150"  y1="0"></line>
+  <line x0="0" y0="0" x1="0"    y1="150"></line>
+  <line x0="0" y0="0" x1="-150" y1="0"></line>
+  <line x0="0" y0="0" x1="0"    y1="-150"></line>
+ </g>
+</svg>
+					</div>
+				</section>
+				<section>
+					<div class="slide">
+<pre><code data-trim>
+<svg height="350" width="350">
+  <g transform="translate(175,175)">
+    <line x0="0" y0="0" x1="150"  y1="0"></line>
+    <line x0="0" y0="0" x1="0"    y1="150"  style="stroke:red"></line>
+    <line x0="0" y0="0" x1="-150" y1="0"    style="stroke:pink"></line>
+    <line x0="0" y0="0" x1="0"    y1="-150" style="stroke:orange"></line>
+  </g>
+</svg>
+</code></pre>
+					</div>
+					<div class="viewer">
+<svg height="350" width="350">
+ <g transform="translate(175,175)">
+  <line x0="0" y0="0" x1="150"  y1="0"></line>
+  <line x0="0" y0="0" x1="0"    y1="150" style="stroke:red"></line>
+  <line x0="0" y0="0" x1="-150" y1="0"   style="stroke:pink"></line>
+  <line x0="0" y0="0" x1="0"    y1="-150" style="stroke:orange"></line>
+ </g>
+</svg>
+					</div>
+				</section>
+				<section>
+					<h3>How do we calculate this point?</h3>
+					<img src="./imgs/coords_1.png" class="floating"/>
+				</section>
+				<section data-transition="zoom">
+					<h3>Or any other point along this line?</h3>
+					<img src="./imgs/coords_2.png" class="floating"/>
+				</section>
+				<section data-transition="zoom">
+					<img src="./imgs/coords_3.png" class="floating"/>
+				</section>
+				<section data-transition="none">
+					<h3>Trigonometry!</h3>
+					<img src="./imgs/coords_4.png" class="floating"/>
+				</section>
+				<section data-transition="none">
+					<img src="./imgs/khan.png" class="floating"/>
+				</section>
+				<section data-transition="none">
+					<h1>soh</h1>
+					<h1>cah</h1>
+					<h1>toa</h1>
+				</section>
+				<section data-transition="none">
+					<h3><span class="highlight_letter">s</span>in(𝛩) = <span class="highlight_letter">o</span>pposite/<span class="highlight_letter">h</span>ypotenuse</h3>
+					<h3><span class="highlight_letter">c</span>os(𝛩) = <span class="highlight_letter">a</span>djacent/<span class="highlight_letter">h</span>ypotenuse</h3>
+					<h3><span class="highlight_letter">t</span>an(𝛩) = <span class="highlight_letter">o</span>pposite/<span class="highlight_letter">a</span>djacent</h3>
+				</section>
+				<section data-transition="none">
+					<img src="./imgs/coords_5.png" class="floating"/>
+				</section>
+				<section data-transition="none">
+					<img src="./imgs/coords_6.png" class="floating"/>
+				</section>
+				<section data-transition="none">
+					<img src="./imgs/coords_7.png" class="floating"/>
+				</section>
+        <section>
+          <img src="./imgs/coords_8.png" class="floating"/>
+        </section>
+				<section>
+					<div class="slide">
+<pre><code class="html" data-trim>
+<svg height="350" width="350">
+  <g transform="translate(175,175)">
+  	<circle cx="0" cy="0" r="150"></circle>
+    <line x0="0" y0="0" x1="150"    y1="0"></line>
+    <line x0="0" y0="0" x1="106.07" y1="106.07" style="stroke:#C71B70"></line>
+    <line x0="0" y0="0" x1="0"      y1="150"></line>
+    <line x0="0" y0="0" x1="-150"   y1="0"></line>
+    <line x0="0" y0="0" x1="0"      y1="-150"></line>
+  </g>
+</svg>
+</code></pre>
+					</div>
+					<div class="viewer">
+<svg height="350" width="350">
+ <g transform="translate(175,175)">
+ 	<circle cx="0" cy="0" r="150"></circle>
+  <line x0="0" y0="0" x1="150"  y1="0"></line>
+  <line x0="0" y0="0" x1="106.07" y1="106.07" style="stroke:#C71B70"></line>
+  <line x0="0" y0="0" x1="0"    y1="150"></line>
+  <line x0="0" y0="0" x1="-150" y1="0"></line>
+  <line x0="0" y0="0" x1="0"    y1="-150"></line>
+ </g>
+</svg>
+					</div>
+				</section>
+        <section>
+          <img src="./imgs/coords_9.png" class="floating"/>
+        </section>
+        <section>
+          <img src="./imgs/unit_circle.gif" style="background-color: white"/>
+        </section>
+        <section>
+        <h2>Let's try in D3</h2>
+        </section>
+				<section>
+					<h3>SETUP</h3>
+					<div class="slide">
+<pre><code class="javascript" data-trim>
+var chart = d3.select('#chart');
+var width = 900, height = 600;
+var padding = 60;
+var radius = d3.min([width - padding, height - padding])/2;
+
+var svg = chart.selectAll("svg")
+  .data([{}]).enter()
+  .append("svg")
+  .attr("height", height)
+  .attr("width", width);
+
+var centerCoords = [width/2, height/2];
+var radar = svg.append('g')
+  .attr('transform',"translate(" + centerCoords[0] + "," + centerCoords[1] + ")");
+</code></pre>
+					</div>
+				</section>
+				<section>
+					<div class="slide">
+<pre><code class="javascript" data-trim>
+var angles = d3.range(0,360,45);
+// [0, 45, 90, 135, 180, 225, 270, 315]
+radar.append('circle')
+  .attr('cx',0)
+  .attr('cy',0)
+  .attr('r', radius);
+
+radar.selectAll('line')
+  .data(angles).enter()
+  .append('line')
+  .attr('x0',0)
+  .attr('y0',0)
+  .attr('x1',function(d) { return Math.cos(d) * radius})
+  .attr('y1',function(d) { return Math.sin(d) * radius});
+</code></pre>
+					</div>
+				</section>
+				<section data-state="index_0"></section>
+        <section>
+          <img src="./imgs/dont.gif"/>
+        </section>
+				<section>
+					<h1>Radians!</h1>
+				</section>
+				<section>
+					<h1>What are Radians?</h1>
+          <img src="./imgs/circle_radians.gif"/>
+				</section>
+        <section>
+          <h1>Degrees to Radians</h1>
+          <h3>radians = degrees * ∏/180</h3>
+        </section>
+				<section>
+					<div class="slide">
+<pre><code class="javascript" data-trim>
+var angles = d3.range(0,360,45)
+  .map(function(a) { return a * Math.PI / 180});
+// [0, 0.7853981633974483, 1.5707963267948966, 2.356194490192345,
+//  3.141592653589793, 3.9269908169872414, 4.71238898038469,
+//  5.497787143782138]
+
+radar.selectAll('line')
+  .data(angles).enter()
+  .append('line')
+  .attr('x0',0)
+  .attr('y0',0)
+  .attr('x1',function(d) { return Math.cos(d) * radius})
+  .attr('y1',function(d) { return Math.sin(d) * radius});
+</code></pre>
+					</div>
+				</section>
+				<section data-state="index_1"></section>
+				<section>
+          <h1>Now let's build a radar</h1>
+        </section>
+        <section>
+					<img src="./imgs/westworld.png"/>
+				</section>
+				<section>
+					<div class="slide">
+<pre><code class="javascript" data-trim>
+var data = [
+{attribute: 'Bulk Apperception', value: 14},
+{attribute: 'Candor', value: 19},
+{attribute: 'Vivacity', value: 17},
+{attribute: 'Coordination', value: 10},
+{attribute: 'Meekness', value: 2},
+{attribute: 'Humility', value: 3},
+{attribute: 'Cruelty', value: 1},
+{attribute: 'Self-Preservation', value: 10},
+{attribute: 'Patience', value: 3},
+{attribute: 'Decisiveness', value: 14},
+{attribute: 'Imagination', value: 13},
+{attribute: 'Curiosity', value: 8},
+{attribute: 'Aggression', value: 5},
+{attribute: 'Loyalty', value: 16},
+{attribute: 'Empathy', value: 9},
+{attribute: 'Tenacity', value: 17},
+{attribute: 'Courage', value: 15},
+{attribute: 'Sensuality', value: 18},
+{attribute: 'Charm', value: 18},
+{attribute: 'Humor', value: 9}
+]
+</code></pre>
+					</div>
+				</section>
+        <section>
+          <div class="slide">
+<pre><code class="javascript" data-trim>
+var angleInRadians = (360 / data.length) * Math.PI / 180;
+
+radar.selectAll('line.axis')
+  .data(data).enter()
+  .append('line')
+  .classed('axis',true)
+  .attr('x0',0)
+  .attr('y0',0)
+  .attr('x1',function(d,i) {
+    return Math.cos(angleInRadians * i) * radius
+  })
+  .attr('y1',function(d,i) {
+    return Math.sin(angleInRadians * i) * radius
+  })
+</code></pre>
+          </div>
+        </section>
+				<section data-state="index_2"></section>
+				<section>
+					<div class="slide">
+					<h4>With a Scale</h4>
+<pre><code class="javascript" data-trim>
+var angle = d3.scaleLinear()
+    .domain([0, data.length])
+    .range([0, 2 * Math.PI])
+
+radar.selectAll('line.axis')
+  .data(data).enter()
+  .append('line')
+  .classed('axis',true)
+  .attr('x0',0)
+  .attr('y0',0)
+  .attr('x1',function(d,i) {
+    return Math.cos(angle(i)) * radius
+  })
+  .attr('y1',function(d,i) {
+    return Math.sin(angle(i)) * radius
+  })
+</code></pre>
+					</div>
+				</section>
+				<section data-state="index_3"></section>
+				<section>
+					<div class="slide">
+					<h4>Axis &amp; Labels</h4>
+<pre><code class="javascript" data-trim>
+radar.selectAll('line.axis')
+  .data(data).enter()
+  .append('line')
+  .classed('axis',true)
+  .attr('x0',0)
+  .attr('y0',0)
+  .attr('x1',function(d,i) { return X(i)})
+  .attr('y1',function(d,i) { return Y(i)})
+
+radar.selectAll('text.label')
+  .data(data).enter()
+  .append('text')
+  .classed('label',true)
+  .attr('x', function(d,i) { return X(i) })
+  .attr('y', function(d,i) { return Y(i) })
+  .text(function(d) {
+    return d.attribute.toUpperCase() + " [" + d.value +"]";
+  })
+</code></pre>
+					</div>
+				</section>
+				<section data-state="index_4"></section>
+        <section>
+          <div class="slide">
+          <h4></h4>
+<pre><code class="javascript" data-trim>
+var labelAnchor = function(d, i) {
+  var topAngle = 0 - Math.PI/2;
+  var bottomAngle = 0 + Math.PI/2;
+  var the_angle = angle(i) - RADIAN_OFFSET;
+  var anchor = "";
+  if (the_angle == topAngle || the_angle == bottomAngle)
+    anchor = "middle"
+  else if(the_angle > topAngle && the_angle < bottomAngle)
+    anchor = "start"
+  else
+    anchor = "end"
+  return anchor;
+}
+</code></pre>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
+          <h4>ALIGNING LABELS</h4>
+<pre><code class="javascript" data-trim>
+radar.selectAll('text.label')
+  .data(data).enter()
+  .append('text')
+  .classed('label',true)
+  .attr('x', function(d,i) { return X(i, 20)})
+  .attr('y', function(d,i) { return Y(i, 20)})
+  .style("text-anchor", labelAnchor)
+  .text(function(d) {
+    return d.attribute.toUpperCase() + " [" + d.value +"]";
+  })
+</code></pre>
+          </div>
+        </section>
+        <section data-state="index_41"></section>
+
+
+
+        <section>
+          <div class="slide">
+          <h4>RINGS</h4>
+<pre><code class="javascript" data-trim>
+var measureScale = d3.scaleLinear()
+    .domain([0, 20])
+    .range([0, radius])
+
+radar.selectAll('circle.ring')
+  .data(data).enter()
+  .append('circle')
+  .classed('ring',true)
+  .attr('cx',0)
+  .attr('cy',0)
+  .attr('r', function(d,i) {
+    return measureScale(i + 1);
+  })
+</code></pre>
+          </div>
+        </section>
+        <section data-state="index_5"></section>
+
+        <section>
+          <div class="slide">
+          <h4>AREA</h4>
+<pre><code class="javascript" data-trim>
+radar.selectAll('polygon.area')
+  .data([data]).enter()
+  .append('polygon')
+  .classed('area',true)
+  .attr('points', function(d) {
+    return d.map(function(d,i) {
+      var rad = measureScale(d.value);
+      return [X(i, rad), Y(i, rad)];
+    }).join(' ');
+  })
+</code></pre>
+          </div>
+        </section>
+        <section data-state="index_6"></section>
+        <section>
+          <div class="slide">
+          <h4>POINTS</h4>
+<pre><code class="javascript" data-trim>
+radar.selectAll('circle.point')
+  .data(data).enter()
+  .append('circle')
+  .classed('point',true)
+  .attr('cx',function(d,i) { 
+    return X(i,measureScale(d.value))})
+  .attr('cy',function(d,i) { 
+    return Y(i,measureScale(d.value))})
+  .attr('r', 7)
+</code></pre>
+          </div>
+        </section>
+        <section data-state="index_7"></section>
+        <section>
+          <div class="slide">
+          <h4>Animated areas</h4>
+<pre><code class="javascript" data-trim>
+var areas = radar.selectAll('polygon.area')
+  .data([data]).enter()
+
+areas.append('polygon')
+  .classed('area',true)
+  .attr('points', function(d) {
+    return d.map(function() {
+      return [0,0]
+    }).join(' ')
+  })
+.merge(areas)
+  .transition()
+  .duration(2500)
+  .attr('points', function(d) {
+    return d.map(function(d,i) {
+      var rad = measureScale(d.value);
+      return [X(i, rad), Y(i, rad)];
+    }).join(' ');
+  })
+</code></pre>
+          </div>
+        </section>
+        <section>
+          <div class="slide">
+          <h4>Animated points</h4>
+<pre><code class="javascript" data-trim>
+var points = radar.selectAll('circle.point')
+  .data(data).enter()
+
+points.append('circle')
+  .classed('point',true)
+  .attr('r', 7)
+  .attr('cx',0)
+  .attr('cy',0)
+.merge(points)
+  .transition()
+  .duration(2500)
+  .attr('cx',function(d,i) {
+    return X(i,measureScale(d.value))
+  })
+  .attr('cy',function(d,i) {
+    return Y(i,measureScale(d.value))
+  })
+</code></pre>
+          </div>
+        </section>
+        <section data-state="index_71"></section>
+        <section><h1>Once Again...</h1></section>
+        <section data-state="index_72"></section>
+        <section>
+          <h1>Thanks</h1>
+          <p>jsancha@carto.com</p>
+          <p>@jorgesancha</p>
+        </section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+				progress: true,
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+		<script src="./js/d3.v4.js"></script>
+		<script src="./js/vizz.js"></script>
+	</body>
+</html>
